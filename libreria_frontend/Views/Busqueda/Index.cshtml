@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Buscar Libros y Autores</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Buscar Libros y Autores</h1>
+        <form id="searchForm" method="get">
+            <div class="form-group">
+                <label for="keywords">Palabras clave</label>
+                <input type="text" id="keywords" name="keywords" class="form-control" placeholder="Buscar por palabras clave">
+            </div>
+            <div class="form-group">
+                <label for="rut">RUT del Autor</label>
+                <input type="text" id="rut" name="rut" class="form-control" placeholder="Buscar por RUT del autor">
+            </div>
+            <div class="form-group">
+                <label for="author">Autor</label>
+                <input type="text" id="author" name="author" class="form-control" placeholder="Buscar por autor">
+            </div>
+            <div class="form-group">
+                <label for="title">Título del Libro</label>
+                <input type="text" id="title" name="title" class="form-control" placeholder="Buscar por título del libro">
+            </div>
+            <div class="form-group">
+                <label for="year">Año del Libro</label>
+                <input type="number" id="year" name="year" class="form-control" placeholder="Buscar por año del libro">
+            </div>
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+        <div id="searchResults" class="mt-4">
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#searchForm").submit(function (event) {
+                event.preventDefault();
+
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: '/Busqueda/Busqueda',
+                    type: 'GET',
+                    data: formData,
+                    success: function (response) {
+                        $("#searchResults").html(response);
+                    },
+                    error: function () {
+                        $("#searchResults").html('<p class="text-danger">Error al realizar la búsqueda.</p>');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

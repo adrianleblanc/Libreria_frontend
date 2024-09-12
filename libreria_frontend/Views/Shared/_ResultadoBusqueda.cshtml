@@ -1,0 +1,38 @@
+﻿@model libreria_frontend.Models.ResultadoBusqueda
+
+<div>
+    <h2>Resultados de la Búsqueda</h2>
+
+    <h3>Libros</h3>
+    <ul>
+        @if (Model.Libros != null)
+        {
+            @foreach (var libro in Model.Libros)
+            {
+                <li>@libro.Titulo - @libro.Anio - @libro.Genero</li>
+            }
+        }
+        else
+        {
+            <li>No se encontraron libros.</li>
+        }
+    </ul>
+
+    <h3>Autores</h3>
+    <ul>
+        @if (Model.Autores != null)
+        {
+            @foreach (var autor in Model.Autores)
+            {
+                @if (autor != null)
+                {
+                    <li>@autor.Nombre_completo - @autor.Rut</li>
+                }
+            }
+        }
+        else
+        {
+            <li>No se encontraron autores.</li>
+        }
+    </ul>
+</div>
